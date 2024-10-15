@@ -5,7 +5,7 @@ import time
 import xml.etree.ElementTree as E_T
 import re
 import copy
-import logging
+from ai.backend.util.write_log import logger
 
 
 # 强制 检查函数
@@ -46,7 +46,7 @@ class DeepSeekClient:
         model = model if model else DEEPSEEK_MODEL
         use_url = use_url if use_url else DEEPSEEK_DEFAULT_URL
         ai_result = cls.call_deepSeek(apiKey, messages, model, use_url)
-        logging.info("进入了ai_result：%s" % (ai_result))
+        logger.info("进入了ai_result：%s" % (ai_result))
         if ai_result:
             return cls.output_to_openai(ai_result)
         else:
@@ -94,7 +94,7 @@ class DeepSeekClient:
         in_token = data['usage']['prompt_tokens']
         out_token = data['usage']['completion_tokens']
         sum_token = data['usage']['total_tokens']
-        logging.info("进入了data：%s" % (data))
+        logger.info("进入了data：%s" % (data))
         # check function call
         if STRICT_MODE_CHECK_FUNCTION:
             function_call_flag = completion.strip().startswith("<function_calls>")
