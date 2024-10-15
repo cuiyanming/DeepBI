@@ -50,7 +50,6 @@ ENV PIP_NO_CACHE_DIR=1
 ## rollback pip version to avoid legacy resolver problem
 RUN pip install pip==20.2.4
 
-RUN pip install pdb
 ## We first copy only the requirements file, to avoid rebuilding on every file change.
 RUN if [ "x$skip_dev_deps" = "x" ] ; then pip install -r requirements_dev.txt ; fi
 #
