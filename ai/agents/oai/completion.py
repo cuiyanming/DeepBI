@@ -204,6 +204,19 @@ class Completion(openai_Completion):
         max_retry_period = config.pop("max_retry_period", cls.max_retry_period)
         retry_wait_time = config.pop("retry_wait_time", cls.retry_wait_time)
 
+        if config.get('functions'):
+            data = {
+                "messages": config['messages'],
+                "functions": config['functions']
+            }
+        else:
+            data = {
+                "messages": config['messages']
+            }
+        # Here the judgment calls a different LLM
+        from .deepseekAdapter import DeepSeekClient
+        return DeepSeekClient.run("zhixiao-Ajo5mEzPvCWeOe5j91xr0k5FsorY91xeokda", data, "", "https://kb.chehejia.com/api/v1/chat/completions")
+
         while True:
             try:
                 use_llm_name = config.get("api_type")  # default llm
