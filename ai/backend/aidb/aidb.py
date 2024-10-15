@@ -337,11 +337,11 @@ class AIDB:
                         str(HttpProxyPort)) > 0:
                     # openai_proxy = "http://127.0.0.1:7890"
                     self.agent_instance_util.openai_proxy = 'http://' + str(HttpProxyHost) + ':' + str(HttpProxyPort)
-                logger.error("欢迎进来这里是 4444444422222222222")
+                logger.error("欢迎进来这里是 44444444")
                 planner_user = self.agent_instance_util.get_agent_planner_user(is_log_out=False)
-                logger.error("欢迎进来这里是 5555555522222222")
+                logger.error("欢迎进来这里是 55555555")
                 api_check = self.agent_instance_util.get_agent_api_check()
-                logger.error("欢迎进来这里是 666666622222222222")
+                logger.error("欢迎进来这里是 6666666")
 
                 logger.error("欢迎进来这里是 apikey ="+str(api_check))
                 await asyncio.wait_for(planner_user.initiate_chat(
@@ -363,8 +363,7 @@ class AIDB:
             except Exception as e:
                 traceback.print_exc()
                 logger.error("欢迎进来这里是 test_api_key方法  报错e")
-                logger.info("进入了ai_result：%s" % (e))
-
+                logger.error("gogogogg----error: " + {e})
                 return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.api_key_fail)
 
         else:
