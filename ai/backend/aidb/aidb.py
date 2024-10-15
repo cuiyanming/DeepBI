@@ -269,53 +269,54 @@ class AIDB:
         logger.info(send_mess)
 
     async def check_api_key(self, is_auto_pilot=False):
-        # self.agent_instance_util.api_key_use = True
-        logger.error("欢迎进来这里是 check_api_key方法")
-        # .token_[uid].json
-        token_path = CONFIG.up_file_path + '.token_' + str(self.uid) + '.json'
-        if os.path.exists(token_path):
-            try:
-                ApiKey, HttpProxyHost, HttpProxyPort, ApiHost, ApiType, ApiModel, LlmSetting = self.load_api_key(token_path)
-                if ApiKey is None or len(ApiKey) == 0:
-                    if not is_auto_pilot:
-                        await self.put_message(500, CONFIG.talker_log, CONFIG.type_log_data, self.error_miss_key)
-                    return False
+        return True
+        # # self.agent_instance_util.api_key_use = True
+        # logger.error("欢迎进来这里是 check_api_key方法")
+        # # .token_[uid].json
+        # token_path = CONFIG.up_file_path + '.token_' + str(self.uid) + '.json'
+        # if os.path.exists(token_path):
+        #     try:
+        #         ApiKey, HttpProxyHost, HttpProxyPort, ApiHost, ApiType, ApiModel, LlmSetting = self.load_api_key(token_path)
+        #         if ApiKey is None or len(ApiKey) == 0:
+        #             if not is_auto_pilot:
+        #                 await self.put_message(500, CONFIG.talker_log, CONFIG.type_log_data, self.error_miss_key)
+        #             return False
 
-                self.agent_instance_util.set_api_key(ApiKey, ApiType, ApiHost, ApiModel, LlmSetting)
+        #         self.agent_instance_util.set_api_key(ApiKey, ApiType, ApiHost, ApiModel, LlmSetting)
 
-                if HttpProxyHost is not None and len(str(HttpProxyHost)) > 0 and HttpProxyPort is not None and len(
-                        str(HttpProxyPort)) > 0:
-                    self.agent_instance_util.openai_proxy = 'http://' + str(HttpProxyHost) + ':' + str(HttpProxyPort)
+        #         if HttpProxyHost is not None and len(str(HttpProxyHost)) > 0 and HttpProxyPort is not None and len(
+        #                 str(HttpProxyPort)) > 0:
+        #             self.agent_instance_util.openai_proxy = 'http://' + str(HttpProxyHost) + ':' + str(HttpProxyPort)
 
-                planner_user = self.agent_instance_util.get_agent_planner_user(is_log_out=False)
-                api_check = self.agent_instance_util.get_agent_api_check()
-                await asyncio.wait_for(planner_user.initiate_chat(
-                    api_check,
-                    # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
-                    message=""" 5-2 =?? """,
-                ), timeout=120)  # time out 120 seconds
+        #         planner_user = self.agent_instance_util.get_agent_planner_user(is_log_out=False)
+        #         api_check = self.agent_instance_util.get_agent_api_check()
+        #         await asyncio.wait_for(planner_user.initiate_chat(
+        #             api_check,
+        #             # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
+        #             message=""" 5-2 =?? """,
+        #         ), timeout=120)  # time out 120 seconds
 
-                self.agent_instance_util.api_key_use = True
+        #         self.agent_instance_util.api_key_use = True
 
-                return True
-            except HTTPError as http_err:
-                traceback.print_exc()
+        #         return True
+        #     except HTTPError as http_err:
+        #         traceback.print_exc()
 
-                error_miss_key = self.generate_error_message(http_err, error_message=LanguageInfo.api_key_fail)
-                if not is_auto_pilot:
-                    await self.put_message(500, CONFIG.talker_log, CONFIG.type_log_data, error_miss_key)
-                return False
-            except Exception as e:
-                traceback.print_exc()
-                logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
-                if not is_auto_pilot:
-                    await self.put_message(500, CONFIG.talker_log, CONFIG.type_log_data, self.error_miss_key)
-                return False
+        #         error_miss_key = self.generate_error_message(http_err, error_message=LanguageInfo.api_key_fail)
+        #         if not is_auto_pilot:
+        #             await self.put_message(500, CONFIG.talker_log, CONFIG.type_log_data, error_miss_key)
+        #         return False
+        #     except Exception as e:
+        #         traceback.print_exc()
+        #         logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+        #         if not is_auto_pilot:
+        #             await self.put_message(500, CONFIG.talker_log, CONFIG.type_log_data, self.error_miss_key)
+        #         return False
 
-        else:
-            await self.put_message(500, receiver=CONFIG.talker_log, data_type=CONFIG.type_log_data,
-                                   content=self.error_miss_key)
-            return False
+        # else:
+        #     await self.put_message(500, receiver=CONFIG.talker_log, data_type=CONFIG.type_log_data,
+        #                            content=self.error_miss_key)
+        #     return False
 
     async def test_api_key(self):
         # self.agent_instance_util.api_key_use = True
@@ -344,11 +345,11 @@ class AIDB:
                 logger.error("欢迎进来这里是 6666666")
 
                 logger.error("欢迎进来这里是 apikey ="+str(api_check))
-                await asyncio.wait_for(planner_user.initiate_chat(
-                    api_check,
-                    # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
-                    message=""" 5-2 =?? """,
-                ), timeout=120)  # time out 120 seconds
+                # await asyncio.wait_for(planner_user.initiate_chat(
+                #     api_check,
+                #     # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
+                #     message=""" 5-2 =?? """,
+                # ), timeout=120)  # time out 120 seconds
                 logger.error("欢迎进来这里是 77777777")
                 self.agent_instance_util.api_key_use = True
                 logger.error("欢迎进来这里是 8888888")
