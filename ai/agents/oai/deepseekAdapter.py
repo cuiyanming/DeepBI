@@ -93,7 +93,7 @@ class DeepSeekClient:
         in_token = data['usage']['prompt_tokens']
         out_token = data['usage']['completion_tokens']
         sum_token = data['usage']['total_tokens']
-        logging.info("进入了data："+{data})
+        logging.info("进入了data：%s" % (data))
         # check function call
         if STRICT_MODE_CHECK_FUNCTION:
             function_call_flag = completion.strip().startswith("<function_calls>")
