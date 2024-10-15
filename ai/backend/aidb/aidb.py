@@ -326,26 +326,30 @@ class AIDB:
             try:
                 logger.error("欢迎进来这里是 test_api_key方法")
                 ApiKey, HttpProxyHost, HttpProxyPort, ApiHost, ApiType, ApiModel, LlmSetting = self.load_api_key(token_path)
+                logger.error("欢迎进来这里是 111111方法")
                 if ApiKey is None or len(ApiKey) == 0:
                     return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.no_api_key)
-
+                logger.error("欢迎进来这里是 2222222方法")
                 self.agent_instance_util.set_api_key(ApiKey, ApiType, ApiHost, ApiModel, LlmSetting)
-
+                logger.error("欢迎进来这里是 33333333")
                 if HttpProxyHost is not None and len(str(HttpProxyHost)) > 0 and HttpProxyPort is not None and len(
                         str(HttpProxyPort)) > 0:
                     # openai_proxy = "http://127.0.0.1:7890"
                     self.agent_instance_util.openai_proxy = 'http://' + str(HttpProxyHost) + ':' + str(HttpProxyPort)
-
+                logger.error("欢迎进来这里是 44444444")
                 planner_user = self.agent_instance_util.get_agent_planner_user(is_log_out=False)
+                logger.error("欢迎进来这里是 55555555")
                 api_check = self.agent_instance_util.get_agent_api_check()
+                logger.error("欢迎进来这里是 6666666")
+
                 await asyncio.wait_for(planner_user.initiate_chat(
                     api_check,
                     # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
                     message=""" 5-2 =?? """,
                 ), timeout=120)  # time out 120 seconds
-
+                logger.error("欢迎进来这里是 77777777")
                 self.agent_instance_util.api_key_use = True
-
+                logger.error("欢迎进来这里是 8888888")
                 return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.api_key_success)
 
             except HTTPError as http_err:
