@@ -5,6 +5,7 @@ import time
 import xml.etree.ElementTree as E_T
 import re
 import copy
+import logging
 
 
 # 强制 检查函数
@@ -92,7 +93,7 @@ class DeepSeekClient:
         in_token = data['usage']['prompt_tokens']
         out_token = data['usage']['completion_tokens']
         sum_token = data['usage']['total_tokens']
-
+        logging.info("进入了data："+{data})
         # check function call
         if STRICT_MODE_CHECK_FUNCTION:
             function_call_flag = completion.strip().startswith("<function_calls>")
@@ -123,7 +124,7 @@ class DeepSeekClient:
 
         return {
             "id": f"chatcmpl-{str(time.time())}",
-            "object": data['object'],
+            # "object": data['object'],
             "created": int(time.time()),
             "model": DEEPSEEK_MODEL,
             "usage": {
