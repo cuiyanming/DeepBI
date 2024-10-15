@@ -12,6 +12,7 @@ from ai.backend.util import base_util
 import asyncio
 from requests.exceptions import HTTPError
 from ai.backend.language_info import LanguageInfo
+import pdb
 
 
 class AIDB:
@@ -342,6 +343,7 @@ class AIDB:
                 api_check = self.agent_instance_util.get_agent_api_check()
                 logger.error("欢迎进来这里是 6666666")
 
+                logger.error("欢迎进来这里是 apikey ="+str(api_check))
                 await asyncio.wait_for(planner_user.initiate_chat(
                     api_check,
                     # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
@@ -361,7 +363,7 @@ class AIDB:
             except Exception as e:
                 traceback.print_exc()
                 logger.error("欢迎进来这里是 test_api_key方法  报错e")
-                logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+                logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + {e})
                 return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.api_key_fail)
 
         else:
