@@ -10,7 +10,7 @@ import copy
 # 强制 检查函数
 STRICT_MODE_CHECK_FUNCTION = False
 # 定义默认参数
-DEEPSEEK_DEFAULT_URL = "https://api.deepseek.com/chat/completions"
+DEEPSEEK_DEFAULT_URL = "https://kb.chehejia.com/api/v1/chat/completions"
 DEEPSEEK_MODEL = "deepseek-chat"
 DEEPSEEK_TEMPERTURE = 0.7
 DEEPSEEK_MAX_TOKENS = 10240

@@ -269,7 +269,7 @@ class AIDB:
 
     async def check_api_key(self, is_auto_pilot=False):
         # self.agent_instance_util.api_key_use = True
-
+        logger.error("欢迎进来这里是 check_api_key方法")
         # .token_[uid].json
         token_path = CONFIG.up_file_path + '.token_' + str(self.uid) + '.json'
         if os.path.exists(token_path):
@@ -324,6 +324,7 @@ class AIDB:
         print('token_path : ', token_path)
         if os.path.exists(token_path):
             try:
+                logger.error("欢迎进来这里是 test_api_key方法")
                 ApiKey, HttpProxyHost, HttpProxyPort, ApiHost, ApiType, ApiModel, LlmSetting = self.load_api_key(token_path)
                 if ApiKey is None or len(ApiKey) == 0:
                     return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.no_api_key)
@@ -349,12 +350,13 @@ class AIDB:
 
             except HTTPError as http_err:
                 traceback.print_exc()
-
+                logger.error("欢迎进来这里是 test_api_key方法  报错http_err")
                 error_miss_key = self.generate_error_message(http_err, error_message=LanguageInfo.api_key_fail)
                 return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, error_miss_key)
 
             except Exception as e:
                 traceback.print_exc()
+                logger.error("欢迎进来这里是 test_api_key方法  报错e")
                 logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
                 return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.api_key_fail)
 
