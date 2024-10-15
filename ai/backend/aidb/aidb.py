@@ -362,8 +362,8 @@ class AIDB:
 
             except Exception as e:
                 traceback.print_exc()
-                logger.error("欢迎进来这里是 test_api_key方法  报错e")
-                logger.error("gogogogg----error: " + {e})
+                logger.error("欢迎进来这里是 test_api_key方法 报错e")
+                logger.error(f"gogogogg----error: {e}")
                 return await self.put_message(200, CONFIG.talker_api, CONFIG.type_test, LanguageInfo.api_key_fail)
 
         else:
