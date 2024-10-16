@@ -99,6 +99,7 @@ class AIDB:
                                       content=answer_message)
 
     async def check_data_base(self, q_str):
+        logger.info("刚进来的时候q_str %s" % (q_str))
         """Check whether the comments meet the requirements. Those that have passed will not be tested again."""
 
         message = [
