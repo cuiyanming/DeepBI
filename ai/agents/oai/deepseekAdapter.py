@@ -45,6 +45,10 @@ class DeepSeekClient:
         messages = cls.transform_message_role(messages_copy)
         model = model if model else DEEPSEEK_MODEL
         use_url = use_url if use_url else DEEPSEEK_DEFAULT_URL
+        logger.info("请求的message：%s" % (messages))
+        logger.info("请求的apiKey：%s" % (apiKey))
+        logger.info("请求的model：%s" % (model))
+        logger.info("请求的model：%s" % (use_url))
         ai_result = cls.call_deepSeek(apiKey, messages, model, use_url)
         logger.info("进入了ai_result：%s" % (ai_result))
         if ai_result:

@@ -152,6 +152,7 @@ class AIDB:
                         # table_content.append(tb_desc)
 
             print("The number of tables to be processed this time:  ", len(table_content))
+            logger.info("The number of tables to be processed this time:   %s" % ( len(table_content)))
             if len(table_content) > 0:
                 try:
                     num = 1 + (len(q_str.get('table_desc')) - len(table_content))
@@ -241,7 +242,7 @@ class AIDB:
                         for fd in tb.get('field_desc'):
                             if not fd.get('is_pass'):
                                 fd['is_pass'] = 0
-
+            logger.info("最终 q_str %s" % (q_str))
             print(" 最终 q_str : ", q_str)
             await self.put_message(200, CONFIG.talker_bi, CONFIG.type_comment, q_str)
         else:

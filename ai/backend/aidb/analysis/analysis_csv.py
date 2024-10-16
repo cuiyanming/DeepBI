@@ -47,7 +47,7 @@ class AnalysisCsv(Analysis):
             if q_data_type == CONFIG.type_comment:
                 result['receiver'] = 'bi'
                 result['data']['data_type'] = 'mysql_comment'
-
+                logger.info("进入csv的执行器里面了")
                 await self.check_data_csv(q_str)
             elif q_data_type == CONFIG.type_comment_first:
                 if json_str.get('data').get('language_mode'):
@@ -101,6 +101,7 @@ class AnalysisCsv(Analysis):
     async def check_data_csv(self, q_str):
         """Check the data description to see if it meets the requirements"""
         print("CONFIG.up_file_path  : " + CONFIG.up_file_path)
+        logger.info("进入csv的执行器里面了")
         if q_str.get('table_desc'):
             for tb in q_str.get('table_desc'):
                 if len(tb.get('field_desc')) == 0:
@@ -127,7 +128,7 @@ class AnalysisCsv(Analysis):
                             "comment": '',
                             "in_use": 1
                         })
-
+        logger.info("进入csv的执行器里面了  check_data_csvz执行没报错  进入下一步aidb.check_data_base")
         await self.check_data_base(q_str)
 
     async def task_generate_echart(self, qustion_message):
