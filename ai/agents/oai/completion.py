@@ -843,7 +843,7 @@ class Completion(openai_Completion):
         if ERROR:
             raise ERROR
         print('create_openai_proxy: ', openai_proxy)
-        logger.error("openai_proxy 1111111 %s" % (openai_proxy))
+        logger.error("我爱你-------openai_proxy 1111111 %s" % (openai_proxy))
         if openai_proxy is not None:
             # Set up a proxy, note that version 1.2 will be outdated
             # openai.proxy = "http://127.0.0.1:7890"

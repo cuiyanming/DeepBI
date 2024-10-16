@@ -165,13 +165,13 @@ class AIDB:
 
                         # if self.language_mode == CONFIG.language_chinese:
                         #     qustion_message = "帮助我检查下列数据注释是否完整且正确: "
-
+                        logger.error("执行貌似报错的方法")
                         await asyncio.wait_for(planner_user.initiate_chat(
                             database_describer,
                             # message=content + '\n' + " This is my question: " + '\n' + str(qustion_message),
                             message=str(qustion_message) + '\n' + str(db_desc),
                         ), timeout=120)  # time out 120 seconds
-
+                        logger.error("失败了")
                         answer_message = planner_user.last_message()["content"]
                         print("answer_message: ", answer_message)
 
@@ -226,7 +226,7 @@ class AIDB:
 
                 except Exception as e:
                     traceback.print_exc()
-                    logger.error("我打的1151515from user")
+                    logger.error("我打的1151515from user:[{}".format(self.user_name) + "] , " + "error: " + {str(e)})
                     await self.put_message(500, CONFIG.talker_log, CONFIG.type_comment, self.error_message_timeout)
                     return
             else:

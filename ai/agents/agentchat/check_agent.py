@@ -73,9 +73,9 @@ Reply "TERMINATE" in the end when everything is done.
             # print("create_chat: ")
             # TODO: #1143 handle token limit exceeded error
             if self.openai_proxy is None:
-                logger.info("ccheck_agent  context  %s" % (messages[-1].pop("context", None)))
-                logger.info("check_agent   _oai_system_message %s" % (self._oai_system_message))
-                logger.info("check_agent   messages %s" % (messages))
+                logger.error("ccheck_agent  context  %s" % (messages[-1].pop("context", None)))
+                logger.error("check_agent   _oai_system_message %s" % (self._oai_system_message))
+                logger.error("check_agent   messages %s" % (messages))
                 response = oai.ChatCompletion.create(
                     context=messages[-1].pop("context", None), 
                     messages=self._oai_system_message + messages,
