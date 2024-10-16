@@ -174,7 +174,7 @@ class AIDB:
                         logger.error("成功了")
                         answer_message = planner_user.last_message()["content"]
                         print("answer_message: ", answer_message)
-                        logger.error("成功了  answer_message", answer_message)
+                        logger.info("成功了  answer_message:   %s" % (answer_message))
 
                         match = re.search(
                             r"```.*```", answer_message.strip(), re.MULTILINE | re.IGNORECASE | re.DOTALL
@@ -234,7 +234,7 @@ class AIDB:
                 percentage_integer = 100
                 await self.put_message(200, CONFIG.talker_log, CONFIG.type_data_check,
                                        content=percentage_integer)
-
+            logger.info("处理前的q_str %s" % (q_str))
             if q_str.get('table_desc'):
                 for tb in q_str.get('table_desc'):
                     if not tb.get('is_pass'):
