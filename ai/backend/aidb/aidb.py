@@ -152,7 +152,7 @@ class AIDB:
                         # table_content.append(tb_desc)
 
             print("The number of tables to be processed this time:  ", len(table_content))
-            logger.info("The number of tables to be processed this time:   %s" % ( len(table_content)))
+            logger.info("我打的The number of tables to be processed this time:   %s" % ( len(table_content)))
             if len(table_content) > 0:
                 try:
                     num = 1 + (len(q_str.get('table_desc')) - len(table_content))
@@ -226,6 +226,7 @@ class AIDB:
 
                 except Exception as e:
                     traceback.print_exc()
+                    logger.error("An exception occurred: %s", traceback.print_exc())
                     logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
                     await self.put_message(500, CONFIG.talker_log, CONFIG.type_comment, self.error_message_timeout)
                     return
