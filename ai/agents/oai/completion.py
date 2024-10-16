@@ -840,73 +840,6 @@ class Completion(openai_Completion):
         agent_name: Optional[str] = None,
         **config,
     ):
-        """Make a completion for a given context.
-
-        Args:
-            context (Dict, Optional): The context to instantiate the prompt.
-                It needs to contain keys that are used by the prompt template or the filter function.
-                E.g., `prompt="Complete the following sentence: {prefix}, context={"prefix": "Today I feel"}`.
-                The actual prompt will be:
-                "Complete the following sentence: Today I feel".
-                More examples can be found at [templating](https://microsoft.github.io/autogen/docs/Use-Cases/enhanced_inference#templating).
-            use_cache (bool, Optional): Whether to use cached responses.
-            config_list (List, Optional): List of configurations for the completion to try.
-                The first one that does not raise an error will be used.
-                Only the differences from the default config need to be provided.
-                E.g.,
-
-        ```python
-        response = oai.Completion.create(
-            config_list=[
-                {
-                    "model": "gpt-4",
-                    "api_key": os.environ.get("AZURE_OPENAI_API_KEY"),
-                    "api_type": "azure",
-                    "api_base": os.environ.get("AZURE_OPENAI_API_BASE"),
-                    "api_version": "2023-03-15-preview",
-                },
-                {
-                    "model": "gpt-3.5-turbo",
-                    "api_key": os.environ.get("OPENAI_API_KEY"),
-                    "api_type": "open_ai",
-                    "api_base": "https://api.openai.com/v1",
-                },
-                {
-                    "model": "llama-7B",
-                    "api_base": "http://127.0.0.1:8080",
-                    "api_type": "open_ai",
-                }
-            ],
-            prompt="Hi",
-        )
-        ```
-
-            filter_func (Callable, Optional): A function that takes in the context, the config and the response and returns a boolean to indicate whether the response is valid. E.g.,
-
-        ```python
-        def yes_or_no_filter(context, config, response):
-            return context.get("yes_or_no_choice", False) is False or any(
-                text in ["Yes.", "No."] for text in oai.Completion.extract_text(response)
-            )
-        ```
-
-            raise_on_ratelimit_or_timeout (bool, Optional): Whether to raise RateLimitError or Timeout when all configs fail.
-                When set to False, -1 will be returned when all configs fail.
-            allow_format_str_template (bool, Optional): Whether to allow format string template in the config.
-            **config: Configuration for the openai API call. This is used as parameters for calling openai API.
-                The "prompt" or "messages" parameter can contain a template (str or Callable) which will be instantiated with the context.
-                Besides the parameters for the openai API call, it can also contain:
-                - `max_retry_period` (int): the total time (in seconds) allowed for retrying failed requests.
-                - `retry_wait_time` (int): the time interval to wait (in seconds) before retrying a failed request.
-                - `seed` (int) for the cache. This is useful when implementing "controlled randomness" for the completion.
-
-        Returns:
-            Responses from OpenAI API, with additional fields.
-                - `cost`: the total cost.
-            When `config_list` is provided, the response will contain a few more fields:
-                - `config_id`: the index of the config in the config_list that is used to generate the response.
-                - `pass_filter`: whether the response passes the filter function. None if no filter is provided.
-        """
         if ERROR:
             raise ERROR
         print('create_openai_proxy: ', openai_proxy)
@@ -923,6 +856,7 @@ class Completion(openai_Completion):
 
         if config_list:
             last = len(config_list) - 1
+            logger.info("你好呀 这进入到completion,completion 859")
             cost = 0
             for i, each_config in enumerate(config_list):
                 base_config = config.copy()
@@ -946,17 +880,17 @@ class Completion(openai_Completion):
                     pass_filter = filter_func is None or filter_func(
                         context=context, base_config=config, response=response
                     )
+                    logger.info("你好呀 这进入到completion")
                     if pass_filter or i == last:
                         logger.info("completion，response all %s" % (response))
                         logger.info("completion，%s" % (str(cost)))
-                        logger.info("completion  response，%s" % (response["cost"]))
                         response["cost"] = cost + response["cost"]
                         response["config_id"] = i
                         response["pass_filter"] = pass_filter
                         return response
                     cost += response["cost"]
                 except (AuthenticationError, RateLimitError, Timeout, InvalidRequestError):
-                    logger.debug(f"failed with config {i}", exc_info=1)
+                    logger.error(f"failed with config1111111111 {i}", exc_info=1)
                     if i == last:
                         raise
         params = cls._construct_params(context, config, allow_format_str_template=allow_format_str_template)
