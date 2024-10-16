@@ -180,12 +180,13 @@ class AIDB:
                         match = re.search(
                             r"```.*```", answer_message.strip(), re.MULTILINE | re.IGNORECASE | re.DOTALL
                         )
+                        logger.info("answer_messag 111111111111111111111111")
                         json_str = ""
                         if match:
                             json_str = match.group()
                         else:
                             json_str = answer_message
-
+                        
                         try:
                             json_str = json_str.replace("```json", "")
                             json_str = json_str.replace("```", "")
@@ -224,6 +225,8 @@ class AIDB:
                                                    content=percentage_integer)
                             num = num + 1
                         except Exception as e:
+                            logger.info("answer_messag 又报错了")
+                            logger.error("我打的1151515from user:[{}".format(self.user_name) + "] , " + "error: " + {str(e)})
                             pass
 
                 except Exception as e:
