@@ -885,7 +885,7 @@ class Completion(openai_Completion):
                     if pass_filter or i == last:
                         logger.info("completion，response all %s" % (response))
                         logger.info("completion，%s" % (str(cost)))
-                        response["cost"] = cost + response["cost"]
+                        # response["cost"] = cost + response["cost"]
                         response["config_id"] = i
                         response["pass_filter"] = pass_filter
                         return response
