@@ -226,8 +226,8 @@ class AIDB:
 
                 except Exception as e:
                     traceback.print_exc()
-                    logger.error("An exception occurred: %s", traceback.print_exc())
-                    logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+        
+                    logger.error("我打的1151515from user:[{}".format(self.user_name) + "] , " + "error: " + {e})
                     await self.put_message(500, CONFIG.talker_log, CONFIG.type_comment, self.error_message_timeout)
                     return
             else:
