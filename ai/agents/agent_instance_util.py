@@ -1172,15 +1172,7 @@ class AgentInstanceUtil:
             user_name=self.user_name,
             websocket=self.websocket,
             llm_config={
-                "config_list": [
-                {
-                    'model': ApiModel,
-                    'api_key': self.api_key,
-
-                    'api_type': ApiType,
-                    'llm_setting': LlmSetting
-                },
-            ],
+                "config_list": self.config_list_gpt4_turbo,
                 "request_timeout": request_timeout,
             },
             openai_proxy=self.openai_proxy,
