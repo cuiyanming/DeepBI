@@ -50,7 +50,9 @@ class DeepSeekClient:
         logger.info("请求的model：%s" % (model))
         logger.info("请求的model：%s" % (use_url))
         ai_result = cls.call_deepSeek(apiKey, messages, model, use_url)
-        logger.info("进入了ai_result：%s" % (ai_result))
+        logger.info("--------------------------------------进入了ai_result：------------------------------------")
+        logger.info("--------------------------------------进入了ai_result：------------------------------------")
+        logger.info("--------------------------------------进入了ai_result：%s" % (ai_result))
         if ai_result:
             return cls.output_to_openai(ai_result)
         else:
@@ -98,7 +100,9 @@ class DeepSeekClient:
         in_token = data['usage']['prompt_tokens']
         out_token = data['usage']['completion_tokens']
         sum_token = data['usage']['total_tokens']
-        logger.info("进入了data：%s" % (data))
+        logger.info("--------------------------------------进入了ai_result：------------------------------------")
+        logger.info("--------------------------------------进入了ai_result：------------------------------------")
+        logger.info("-------------------------------------------------进入了data：%s" % (data))
         # check function call
         if STRICT_MODE_CHECK_FUNCTION:
             function_call_flag = completion.strip().startswith("<function_calls>")

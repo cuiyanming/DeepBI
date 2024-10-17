@@ -134,7 +134,7 @@ class AutopilotMysql(Autopilot):
 
                 except Exception as e:
                     traceback.print_exc()
-                    logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+                    logger.error("from user:[{}".format(self.user_name) + "] , " + "auto myslq  11111error: " + str(e))
                     error_times = error_times + 1
 
             if error_times >= max_retry_times:

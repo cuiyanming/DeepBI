@@ -125,7 +125,7 @@ class AnalysisMysql(Analysis):
 
                 except Exception as e:
                     traceback.print_exc()
-                    logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+                    logger.error("from 崔先生:[{}".format(self.user_name) + "] , " + "error: " + str(e))
                     error_times = error_times + 1
 
             if error_times >= max_retry_times:
@@ -133,7 +133,7 @@ class AnalysisMysql(Analysis):
 
         except Exception as e:
             traceback.print_exc()
-            logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+            logger.error("from 先皇:[{}".format(self.user_name) + "] , " + "error: " + str(e))
 
         return self.agent_instance_util.data_analysis_error
 
@@ -243,5 +243,5 @@ class AnalysisMysql(Analysis):
 
         except Exception as e:
             traceback.print_exc()
-            logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+            logger.error("from user:[{}".format(self.user_name) + "] , " + "error: 崔晏铭" + str(e))
         return self.agent_instance_util.data_analysis_error

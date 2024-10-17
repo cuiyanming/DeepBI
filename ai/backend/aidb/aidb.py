@@ -91,7 +91,7 @@ class AIDB:
 
         except Exception as e:
             traceback.print_exc()
-            logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+            logger.error("from 崔1111111111111111:[{}".format(self.user_name) + "] , " + "error: " + str(e))
             return await self.put_message(500, receiver=CONFIG.talker_bi, data_type=CONFIG.type_comment_first,
                                           content=self.error_message_timeout)
 
@@ -186,17 +186,18 @@ class AIDB:
                             json_str = match.group()
                         else:
                             json_str = answer_message
-                        
+                        logger.info("answer_messag 222222222222222222222")
                         try:
                             json_str = json_str.replace("```json", "")
                             json_str = json_str.replace("```", "")
+                            logger.info("answer_messag 3333333333333333333")
                             # print('json_str : ', json_str)
                             chart_code_str = json_str.replace("\n", "")
                             if base_util.is_json(chart_code_str):
                                 table_desc = json.loads(chart_code_str)
                             else:
                                 table_desc = ast.literal_eval(chart_code_str)
-
+                            logger.info("answer_messag 44444444444444444444444")
                             table_name = table_desc.get('table_name')
 
                             # print("q_str['table_desc'] ,", q_str['table_desc'])
@@ -217,7 +218,7 @@ class AIDB:
                                                             field['comment'] = field.get('name')
                                                         field['is_pass'] = fd.get(
                                                             'is_pass')
-
+                            logger.info("answer_messag 55555555555555555555")
                             percentage = (num / len(q_str.get('table_desc'))) * 100
                             percentage_integer = int(percentage)
 

@@ -325,7 +325,7 @@ class AutopilotMysql(Autopilot):
 
                 except Exception as e:
                     traceback.print_exc()
-                    logger.error("from user:[{}".format(self.user_name) + "] , " + "error: " + str(e))
+                    logger.error("from user:[{}".format(self.user_name) + "] , " + "mysql-aip 1 11error: " + str(e))
                     error_times = error_times + 1
                     use_cache = False
 
